@@ -67,7 +67,7 @@ describe("#placeInTable", function () {
 });
 
 
-describe("#checkBoardisFull", function () {
+describe("#checkBoardIsFull", function () {
     let testBoard_allNulls = [
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
@@ -110,25 +110,74 @@ describe("#checkBoardisFull", function () {
     ];
 
     it("should return false because array contains null", function () {
-        expect(checkBoardisFull(testBoard_allNulls)).toEqual(false);
+        expect(checkBoardIsFull(testBoard_allNulls)).toEqual(false);
     });
 
     it("should return false because array contains null", function () {
-        expect(checkBoardisFull(testBoard_oneNull)).toEqual(false);
+        expect(checkBoardIsFull(testBoard_oneNull)).toEqual(false);
     });
 
     it("should return false because array contains null", function () {
-        expect(checkBoardisFull(testBoard_firstNull)).toEqual(false);
+        expect(checkBoardIsFull(testBoard_firstNull)).toEqual(false);
     });
 
     it("should return false because array contains null", function () {
-        expect(checkBoardisFull(testBoard_lastNull)).toEqual(false);
+        expect(checkBoardIsFull(testBoard_lastNull)).toEqual(false);
     });
 
     it("should return true because array does not contain null", function () {
-        expect(checkBoardisFull(testBoard_noNulls)).toEqual(true);
+        expect(checkBoardIsFull(testBoard_noNulls)).toEqual(true);
     });
 });
+
+
+describe("#findSpotForCol", function () {
+    let testBoard_allNulls = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null]
+    ]
+    let testBoard_someNums = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, 1, null, 2],
+        [2, null, 1, null, 2, 1, 1]
+    ]
+    //// Test version of findSpotForCol
+    function test_findSpotForCol(x, boardArray) {
+        let y = null;
+
+        for (let i = HEIGHT - 1; i >= 0; i--) {
+            if (boardArray[i][x] === null) {
+                y = i;
+                break;
+            }
+        }
+        return y;
+    } 
+
+    it("should detect childNode in appropriate cell", function () {
+        expect(test_findSpotForCol(1, testBoard_allNulls)).toEqual(5);
+    });
+    it("should detect childNode in appropriate cell", function () {
+        expect(test_findSpotForCol(3, testBoard_allNulls)).toEqual(5);
+    });
+    it("should detect childNode in appropriate cell", function () {
+        expect(test_findSpotForCol(6, testBoard_someNums)).toEqual(3);
+    });
+    it("should detect childNode in appropriate cell", function () {
+        expect(test_findSpotForCol(0, testBoard_someNums)).toEqual(4);
+    });
+});
+
+
+
+
 
 
 

@@ -15,6 +15,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 // board = array of rows, each row is array of cells  (board[y][x])
 
 
+
 function makeBoard() {
   //// DONE || TODO: set "board" to empty HEIGHT x WIDTH matrix array 
   //Loop to add board row HEIGHT number of times
@@ -23,6 +24,8 @@ function makeBoard() {
     board.push(Array(WIDTH).fill(null));
   }
 }
+
+
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
@@ -80,12 +83,23 @@ function makeHtmlBoard() {
 }
 
 
+
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  //// DONE || TODO: write the real version of this, rather than always returning 0
+  let y = null;
+
+  for(let i = HEIGHT - 1; i >= 0; i--) {
+    if(board[i][x] === null) {
+       y = i;
+       break;
+    }
+  }
+  return y;
 }
+
+
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
@@ -107,12 +121,15 @@ function placeInTable(y, x) {
   cell.append(piece);
 }
 
+
+
 /** endGame: announce game end */
 
 function endGame(msg) {
   // TODO: pop up alert message
   alert(msg);
 }
+
 
 /** handleClick: handle click of column top to play piece */
 
@@ -129,7 +146,7 @@ function handleClick(evt) {
   placeInTable(y, x);
   //// DONE || TODO: add line to update in-memory board
   //Updates the item in the array with the player that occupies that cell
-  board[y][x] = `P${currPlayer}`;
+  board[y][x] = currPlayer;
 
   // check for win
   if (checkForWin()) {
@@ -138,7 +155,7 @@ function handleClick(evt) {
 
   // check for tie
   //// DONE || TODO: check if all cells in board are filled; if so call, call endGame
-  if (checkBoardisFull(board)) {
+  if (checkBoardIsFull(board)) {
     //if checkBoardisFull returns true endGame with "Draw" message is called
     return endGame(`Game end in draw. Nobody wins!`);
   }
@@ -149,9 +166,10 @@ function handleClick(evt) {
 }
 
 
+
 /** checkBoardisFull: checks if board is full */
 
-function checkBoardisFull(arr) {
+function checkBoardIsFull(arr) {
   //Takes and array and checks if every item in every row(arrays in the array), is not null
   //returns boolean
   for (let row of arr) {
@@ -159,6 +177,8 @@ function checkBoardisFull(arr) {
   }
   return true;
 }
+
+
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
@@ -193,6 +213,8 @@ function checkForWin() {
     }
   }
 }
+
+
 
 makeBoard();
 makeHtmlBoard();

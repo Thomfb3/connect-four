@@ -1,30 +1,38 @@
-/** Connect Four
- *
- * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
- * column until a player gets four-in-a-row (horiz, vert, or diag) or until
- * board fills (tie)
- */
+// Connect Four
+//  
+// Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
+// column until a player gets four-in-a-row (horiz, vert, or diag) or until
+// board fills (tie)
+//  
 
 const WIDTH = 7;
 const HEIGHT = 6;
 
-const currPlayer = 1; // active player: 1 or 2
-const board = []; // array of rows, each row is array of cells  (board[y][x])
+let currPlayer = 1; // active player: 1 or 2
+let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
+// makeBoard: create in-JS board structure:
+// board = array of rows, each row is array of cells  (board[y][x])
+
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  /// DONE || TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  //Make array with WIDTH number of nulls
+  const boardRow = Array(WIDTH).fill(null);
+
+  //Loop to add board row HEIGHT number of times
+  for (let i = 0; i < HEIGHT; i++) {
+    board.push(boardRow);
+  }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  //TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  const htmlBoard = document.getElementById("board");
 
-  // TODO: add comment for this code
+  //TODO: add comment for this code
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
@@ -34,6 +42,7 @@ function makeHtmlBoard() {
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
+
   htmlBoard.append(top);
 
   // TODO: add comment for this code

@@ -10,7 +10,7 @@ describe("#makeBoard", function () {
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null]
     ];///This array works for width = 7 and height = 6;
     const test_board = [];
 
@@ -65,6 +65,71 @@ describe("#placeInTable", function () {
         expect(cell.childNodes.length).toEqual(1);
     });
 });
+
+
+describe("#checkBoardisFull", function () {
+    let testBoard_allNulls = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null]
+    ];
+    let testBoard_oneNull = [
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", null, "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"]
+    ];
+    let testBoard_firstNull = [
+        [null, "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"]
+    ];
+    let testBoard_lastNull = [
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", null]
+    ];
+    let testBoard_noNulls = [
+        ["hi", "null", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "null", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"],
+        ["hi", "null", "hi", "world", "hi", "world"],
+        ["hi", "world", "hi", "world", "hi", "world"]
+    ];
+
+    it("should return false because array contains null", function () {
+        expect(checkBoardisFull(testBoard_allNulls)).toEqual(false);
+    });
+
+    it("should return false because array contains null", function () {
+        expect(checkBoardisFull(testBoard_oneNull)).toEqual(false);
+    });
+
+    it("should return false because array contains null", function () {
+        expect(checkBoardisFull(testBoard_firstNull)).toEqual(false);
+    });
+
+    it("should return false because array contains null", function () {
+        expect(checkBoardisFull(testBoard_lastNull)).toEqual(false);
+    });
+
+    it("should return true because array does not contain null", function () {
+        expect(checkBoardisFull(testBoard_noNulls)).toEqual(true);
+    });
+});
+
 
 
 

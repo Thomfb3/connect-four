@@ -16,13 +16,11 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 
 function makeBoard() {
-  //// DONE || TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  //Make array with WIDTH number of nulls
-  const boardRow = Array(WIDTH).fill(null);
-
+  //// DONE || TODO: set "board" to empty HEIGHT x WIDTH matrix array 
   //Loop to add board row HEIGHT number of times
   for (let i = 0; i < HEIGHT; i++) {
-    board.push(boardRow);
+    //push array with WIDTH number of nulls to the board array
+    board.push(Array(WIDTH).fill(null));
   }
 }
 
@@ -30,12 +28,10 @@ function makeBoard() {
 
 function makeHtmlBoard() {
   //// DONE || TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
   // The html Board Table element
   const htmlBoard = document.getElementById("board");
 
   //// DONE || TODO: add comment for this code
-
   //This creates the top table row and names it "top"
   const top = document.createElement("tr");
   //Sets the id of the "top" table row element to "column-top"
@@ -59,7 +55,6 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   //// DONE || TODO: add comment for this code
-
   //This loop creates the rest of the board
   //This outer loop runs HEIGHT number of times
   for (let y = 0; y < HEIGHT; y++) {
@@ -99,15 +94,16 @@ function placeInTable(y, x) {
   const piece = document.createElement("div");
   piece.classList.add("piece");
 
+  //Check currPlayer and add that player's class to the piece
   if (currPlayer === 1) {
     piece.classList.add("p1");
-    currPlayer = 2;
   } else {
     piece.classList.add("p2");
-    currPlayer = 1;
   }
 
+  //Get the cell with the id that corresponds to the x and y coordinates
   const cell = document.getElementById(`${y}-${x}`)
+  //Append that piece to that cell
   cell.append(piece);
 }
 
@@ -115,6 +111,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -128,10 +125,11 @@ function handleClick(evt) {
   if (y === null) {
     return;
   }
-
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   placeInTable(y, x);
+  //// DONE || TODO: add line to update in-memory board
+  //Updates the item in the array with the player that occupies that cell
+  board[y][x] = `P${currPlayer}`;
 
   // check for win
   if (checkForWin()) {
@@ -139,10 +137,27 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  //// DONE || TODO: check if all cells in board are filled; if so call, call endGame
+  if (checkBoardisFull(board)) {
+    //if checkBoardisFull returns true endGame with "Draw" message is called
+    return endGame(`Game end in draw. Nobody wins!`);
+  }
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  //// DONE || TODO: switch currPlayer 1 <-> 2
+  currPlayer = (currPlayer === 1) ? currPlayer = 2 : currPlayer = 1;
+}
+
+
+/** checkBoardisFull: checks if board is full */
+
+function checkBoardisFull(arr) {
+  //Takes and array and checks if every item in every row(arrays in the array), is not null
+  //returns boolean
+  for (let row of arr) {
+    if (!row.every((item) => item !== null)) return false;
+  }
+  return true;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */

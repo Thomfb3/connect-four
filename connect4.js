@@ -95,7 +95,20 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  //// DONE || TODO: make a div and insert into correct table cell
+  const piece = document.createElement("div");
+  piece.classList.add("piece");
+
+  if (currPlayer === 1) {
+    piece.classList.add("p1");
+    currPlayer = 2;
+  } else {
+    piece.classList.add("p2");
+    currPlayer = 1;
+  }
+
+  const cell = document.getElementById(`${y}-${x}`)
+  cell.append(piece);
 }
 
 /** endGame: announce game end */

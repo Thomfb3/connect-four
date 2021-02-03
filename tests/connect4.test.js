@@ -12,7 +12,6 @@ describe("#makeBoard", function () {
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
     ];///This array works for width = 7 and height = 6;
-
     const test_board = [];
 
     //same function as makeBoard but this manipulates test variables
@@ -29,6 +28,7 @@ describe("#makeBoard", function () {
         expect(test_board).toEqual(completeBoard_6x7);
     });
 });
+
 
 describe("#makeHtmlBoard", function () {
     const tds = document.querySelectorAll("td");
@@ -51,6 +51,18 @@ describe("#makeHtmlBoard", function () {
 
     it("should return the right id for the last", function () {
         expect(tdArray[tdArray.length - 1].getAttribute("id")).toEqual(lastCellId);
+    });
+});
+
+
+describe("#placeInTable", function () {
+    const x = 6;
+    const y = 5;
+    const cell = document.getElementById(`${y}-${x}`);
+    placeInTable(y, x);
+
+    it("should detect childNode in appropriate cell", function () {
+        expect(cell.childNodes.length).toEqual(1);
     });
 });
 

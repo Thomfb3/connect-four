@@ -16,7 +16,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 
 function makeBoard() {
-  /// DONE || TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  //// DONE || TODO: set "board" to empty HEIGHT x WIDTH matrix array
   //Make array with WIDTH number of nulls
   const boardRow = Array(WIDTH).fill(null);
 
@@ -29,30 +29,57 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  //TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  //// DONE || TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+
+  // The html Board Table element
   const htmlBoard = document.getElementById("board");
 
-  //TODO: add comment for this code
+  //// DONE || TODO: add comment for this code
+
+  //This creates the top table row and names it "top"
   const top = document.createElement("tr");
+  //Sets the id of the "top" table row element to "column-top"
+  //column-top has unique CSS
   top.setAttribute("id", "column-top");
+  //an event listener is added to "top"
+  //this handle click function allows the play to drop a piece on the board
   top.addEventListener("click", handleClick);
 
+  //This loop creates the squares for the top row
+  //It loops WIDTH number of times
   for (let x = 0; x < WIDTH; x++) {
+    //This creates each table data cell 
     const headCell = document.createElement("td");
+    //It gives it an id atribute set to the incrementor value
     headCell.setAttribute("id", x);
+    //Each td is appended to the top row
     top.append(headCell);
   }
-
+  //The "top" row is appended to the htmlBoard
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
+  //// DONE || TODO: add comment for this code
+
+  //This loop creates the rest of the board
+  //This outer loop runs HEIGHT number of times
   for (let y = 0; y < HEIGHT; y++) {
+    //For Each row of the board a table row element is create
     const row = document.createElement("tr");
+
+    //This loop creates the squares for each row
+    //This outer loop runs WIDTH number of times
     for (let x = 0; x < WIDTH; x++) {
+      //Create each td element and names it cell
       const cell = document.createElement("td");
+      //Each cell is given an id attribute with an x and y value
+      //x corresponds with the outer loop incrementor that creates each row
+      //y corresponds with inner loop incrementor that creates each cell
+      //together the x and y create a coordinates for a matrix with which we can navigate the board
       cell.setAttribute("id", `${y}-${x}`);
+      //Each cell is appended to the current row
       row.append(cell);
     }
+    //Each row is appended to the board
     htmlBoard.append(row);
   }
 }

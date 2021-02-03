@@ -90,10 +90,10 @@ function findSpotForCol(x) {
   //// DONE || TODO: write the real version of this, rather than always returning 0
   let y = null;
 
-  for(let i = HEIGHT - 1; i >= 0; i--) {
-    if(board[i][x] === null) {
-       y = i;
-       break;
+  for (let i = HEIGHT - 1; i >= 0; i--) {
+    if (board[i][x] === null) {
+      y = i;
+      break;
     }
   }
   return y;
@@ -183,11 +183,11 @@ function checkBoardIsFull(arr) {
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 function checkForWin() {
+
   function _win(cells) {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
-
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
@@ -199,15 +199,21 @@ function checkForWin() {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-
+  //The outer loop increments the Y coordinate 
   for (let y = 0; y < HEIGHT; y++) {
+    //The outer loop increments the X coordinate 
+    //Looping with incrementing through both X and Y checking the entire board array 
     for (let x = 0; x < WIDTH; x++) {
+      //Currently this function is hard coded to check for 4 in a row.
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
       const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-
+      //Here the _win function checks if each cell is the same player
+      //The _win function checks for 4 horizontal, 4 vertical, 4 diagonal to the left and right
+      //The _win funntion returns a boolean
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+        //If _win function returns true CheckForWin returns true 
         return true;
       }
     }

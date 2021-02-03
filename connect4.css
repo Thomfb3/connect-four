@@ -1,12 +1,37 @@
 /* game board table */
 
 #board td {
-  width: 50px;
-  height: 50px;
+
+  width: 60px;
+  height: 60px;
   border: solid 1px #666;
 }
 
+ #board {
+
+  position: absolute;
+  top: 40%; /* optically centered */
+  left: 50%;
+  /* https://autoprefixer.github.io/ */
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+}
+
+h1 {
+  color: rgb(255, 145, 0);
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  font-size: 75px;
+}
 /* pieces are div within game table cells: draw as colored circles */
+
+/* https://www.w3schools.com/css/css3_animations.asp */
+/* I referenced w3schools for animation css sytanx*/
+@keyframes slideDown {
+  from {transform: translate(0%, -900%);}
+  to {transform: translate(0%, 0%);}
+}
 
 .piece {
   /* TODO: make into circles */
@@ -14,15 +39,22 @@
   margin: 5px;
   width: 80%;
   height: 80%;
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation: slideDown .5s cubic-bezier(.13,-0.01,1,.17);
+  /* I've used this tool in the past to produce cubic-bezier */
+  /* https://cubic-bezier.com/#.13,-0.01,1,.17 */
 }
 
-/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+/* DONE || TODO: make pieces red/blue,  depending on player 1/2 piece */
 .p1 {
-  background-color: red;
+  background-color: rgb(250, 60, 60);
+  box-shadow: 3px 2px 0px rgb(107, 2, 2);
 }
 
 .p2 {
-  background-color: blue;
+  background-color: rgb(35, 73, 241);
+  box-shadow: 3px 2px 0px rgb(3, 3, 138);
 }
 
 
